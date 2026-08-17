@@ -1,57 +1,52 @@
-﻿/*
- * Keon Bushman
- * CST - 250
- * 06/07/2026
- * Factorial Recursion
- * Activity 3
- * Activity 3 Guide
- */
-
-using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace FactorialRecursion.Services.BusinessLogicLayer
 {
     internal class FactorialLogic
     {
         /// <summary>
-        /// Solve the factorial problem using iteration
+        /// Calculates a factorial using iteration.
         /// </summary>
-        /// <param name="factorial"></param>
-        /// <returns></returns>
         internal BigInteger SolveIterativeFactorial(int factorial)
         {
-            // Declare and initialize
+            ValidateInput(factorial);
+
             BigInteger result = 1;
 
-            // Loop through each number from the factorial to 1
-            for (int i = factorial; i > 0; i--)
+            for (int i = factorial; i > 1; i--)
             {
-                // Multiply the current result by the current number
                 result *= i;
             }
 
-            // Return the factorial result
             return result;
         }
 
         /// <summary>
-        /// Solve the factorial problem using recursion
+        /// Calculates a factorial using recursion.
         /// </summary>
-        /// <param name="factorial"></param>
-        /// <returns></returns>
         internal BigInteger SolveRecursiveFactorial(int factorial)
         {
-            // Base case: factorial is 0 or 1
-            if (factorial == 0 || factorial == 1)
+            ValidateInput(factorial);
+
+            if (factorial <= 1)
             {
                 return 1;
             }
 
-            // Perform the recursion
             return factorial * SolveRecursiveFactorial(factorial - 1);
+        }
+
+        /// <summary>
+        /// Rejects values for which factorial is not defined by this application.
+        /// </summary>
+        private static void ValidateInput(int factorial)
+        {
+            if (factorial < 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(factorial),
+                    "Factorial requires a non-negative integer.");
+            }
         }
     }
 }
