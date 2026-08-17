@@ -52,13 +52,6 @@ For example:
 
 The iterative version starts with a result of `1` and multiplies it by each value from `n` down to `2`.
 
-```text
-result = 1
-result *= n
-result *= n - 1
-...
-```
-
 It performs a linear number of multiplication steps and does not require a growing call stack.
 
 ### Recursive
@@ -110,7 +103,7 @@ Results match: True
 ## Project Structure
 
 ```text
-FactorialRecursion/
+FactorialCalculator/
 ├── FactorialRecursion/
 │   ├── Services/
 │   │   └── BusinessLogicLayer/
@@ -130,8 +123,8 @@ FactorialRecursion/
 Clone the repository:
 
 ```bash
-git clone https://github.com/IPFizzy/FactorialRecursion.git
-cd FactorialRecursion
+git clone https://github.com/IPFizzy/FactorialCalculator.git
+cd FactorialCalculator
 ```
 
 Run from the repository root:
@@ -145,12 +138,6 @@ Or open `FactorialRecursion.slnx` in Visual Studio and run the project.
 ## Practice Project Context
 
 This repository is preserved as a completed recursion and iteration exercise. It demonstrates two implementations of the same calculation, explicit base cases, input contracts, arbitrary-precision arithmetic, result verification, and the practical difference between loop-based and recursive control flow.
-
-## Recommended Repository Name
-
-For a public portfolio, **`FactorialCalculator`** is clearer than `FactorialRecursion` because the project demonstrates both recursive and iterative approaches rather than recursion alone.
-
-The internal project, solution, folder, and namespace names can remain unchanged after the GitHub repository itself is renamed.
 
 ## Author
 
