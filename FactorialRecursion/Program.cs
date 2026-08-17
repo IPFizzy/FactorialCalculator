@@ -1,80 +1,45 @@
-﻿/*
- * Keon Bushman
- * CST - 250
- * 06/07/2026
- * Factorial Recursion
- * Activity 3
- * Activity 3 Guide
- */
-
-//---------------------------------------------------------------
-// Start of the Main Method
-//---------------------------------------------------------------
-
-// Declare and initialize
 using FactorialRecursion.Services.BusinessLogicLayer;
 using System.Numerics;
 
+const int MaxInput = 500;
+
 FactorialLogic factorialLogic = new FactorialLogic();
-int input = 0;
-BigInteger iterativeAns = 0, recursiveAns = 0;
 
-// Prompt the user
-Console.Write("Enter a positive number: ");
+Console.WriteLine("Factorial Calculator");
+Console.WriteLine("--------------------");
+Console.Write($"Enter a whole number from 0 to {MaxInput}: ");
 
-// Get the users input
-input = Utility.ReadIntFromConsole();
+int input = Utility.ReadIntFromConsole(0, MaxInput);
 
-// Solve the factorial using iteration
-Console.WriteLine("Solving the factorial using iteration...");
-iterativeAns = factorialLogic.SolveIterativeFactorial(input);
-Console.WriteLine($"Answer: {iterativeAns}");
+Console.WriteLine("\nSolving with iteration...");
+BigInteger iterativeAnswer = factorialLogic.SolveIterativeFactorial(input);
+Console.WriteLine($"{input}! = {iterativeAnswer}");
 
-// Solve the factorial using recursion
-Console.WriteLine("Solving the factorial using recursion...");
-recursiveAns = factorialLogic.SolveRecursiveFactorial(input);
-Console.WriteLine($"Answer: {recursiveAns}");
+Console.WriteLine("\nSolving with recursion...");
+BigInteger recursiveAnswer = factorialLogic.SolveRecursiveFactorial(input);
+Console.WriteLine($"{input}! = {recursiveAnswer}");
 
-//---------------------------------------------------------------
-// End of the Main Method
-//---------------------------------------------------------------
-
-//---------------------------------------------------------------
-// Start of Utility class
-//---------------------------------------------------------------
+Console.WriteLine($"\nResults match: {iterativeAnswer == recursiveAnswer}");
 
 static class Utility
 {
     /// <summary>
-    /// Read an integer from the console
+    /// Reads an integer within the requested inclusive range.
     /// </summary>
-    /// <returns></returns>
-    internal static int ReadIntFromConsole()
+    internal static int ReadIntFromConsole(int minimum, int maximum)
     {
-        // Declare and initialize
-        int input = 0;
-        string inputString = "";
-
-        // Get the users input
-        inputString = Console.ReadLine();
-
-        // See if the user entered valid input
-        while (!int.TryParse(inputString, out input))
+        while (true)
         {
-            Console.WriteLine("Invalid number");
+            string? input = Console.ReadLine();
 
-            // Re-Prompt the user for a number
-            Console.Write("Enter a number: ");
+            if (int.TryParse(input, out int value) &&
+                value >= minimum && value <= maximum)
+            {
+                return value;
+            }
 
-            // Get the users input
-            inputString = Console.ReadLine();
+            Console.WriteLine($"Please enter a whole number from {minimum} to {maximum}.");
+            Console.Write("Try again: ");
         }
-
-        // Return the users input
-        return input;
     }
 }
-
-//---------------------------------------------------------------
-// End of Utility class
-//---------------------------------------------------------------
